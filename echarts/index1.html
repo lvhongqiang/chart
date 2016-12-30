@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 370px; margin: 0 auto;">
+        <img src="legend.png" style="width: 280px; margin: 0 auto;display: block;">
+    <div id="main" style="width: 370px; height: 300px; margin: 0 auto">
+
+    </div>
+    <script type="text/javascript" src="echarts.common.min.js"></script>
+    <script type="text/javascript">
+
+        var myChart = echarts.init(document.getElementById('main'));
+
+        option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: false
+            },
+            xAxis:  {
+                type: 'category',
+                boundaryGap: true,
+                axisTick:{
+                    alignWithLabel: true,
+                    inside: true
+                },
+                data: ['05:00','06:12','08:34','10:23','11:00','12:30','13:10','14:12','15:34','16:23','17:00','18:30']
+            },
+            yAxis: {
+                type: 'value',
+                scale: true,
+                splitLine: {
+                    show: false
+                },
+                axisTick:{
+                    show:false
+                }
+            },
+            dataZoom: [
+                {
+                    type: 'inside',
+                    show: true,
+                    filterMode: 'empty',
+                    zoomLock: true,
+                    xAxisIndex: [0],
+                    start: 25,
+                    end: 75
+                }
+            ],
+            series: [
+                {
+                    name:'高压',
+                    type:'line',
+                    lineStyle:{
+                        normal:{
+                            color:'#d9d9d9'
+                        }
+                    },
+                    data:[115, 117, 126, 136, 123, 125,115, 117, 126, 136, 123, 125],
+                    markPoint: {
+                        symbol: 'circle',
+                        symbolSize:18,
+                        label:{normal:{
+                            show:true,
+                            position:'top',
+                            textStyle:{
+                                color:'#000',
+                                fontSize:18
+                            }
+                        }},
+                        data: [
+                            {
+                                coord:[0,115],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ffde30'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[1,117],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ff9000'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[2,126],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#45c01a'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[3,136],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ff3e3e'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[4,123],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#2782d7'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[5,125],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#45c01a'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[6,115],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ffde30'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[7,117],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ff9000'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[8,126],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#45c01a'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[9,136],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ff3e3e'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[10,123],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#2782d7'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[11,125],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#45c01a'
+                                    }
+                                }
+                            }
+                        ]
+                    }
+
+                },
+                {
+                    name:'低压',
+                    type:'line',
+                    lineStyle:{
+                        normal:{
+                            color:'#d9d9d9'
+                        }
+                    },
+                    data:[92, 84, 85, 97, 84, 78,92, 84, 85, 97, 84, 78],
+                    markPoint: {
+                        symbol: 'circle',
+                        symbolSize:18,
+                        label:{normal:{
+                            show:true,
+                            position:'top',
+                            textStyle:{
+                                color:'#000',
+                                fontSize:18
+                            }
+                        }},
+                        data: [
+                            {
+                                coord:[0,92],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ffde30'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[1,84],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ff9000'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[2,85],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#45c01a'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[3,97],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ff3e3e'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[4,84],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#2782d7'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[5,78],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#45c01a'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[6,92],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ffde30'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[7,84],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ff9000'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[8,85],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#45c01a'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[9,97],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#ff3e3e'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[10,84],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#2782d7'
+                                    }
+                                }
+                            },
+                            {
+                                coord:[11,78],
+                                itemStyle:{
+                                    normal:{
+                                        color:'#45c01a'
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
