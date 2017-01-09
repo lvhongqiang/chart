@@ -193,3 +193,4 @@ var LineExample = function(){
 
     return example;
 };
+LineExample().draw();

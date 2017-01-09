@@ -1,5 +1,5 @@
 "use strict";
-var components = new Components();
+var components = new Component();
 
 var Grid = function () {
     var grid = {};

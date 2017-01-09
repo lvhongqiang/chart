@@ -5,8 +5,8 @@
 // var animation = require("./animation");
 
 var grid = new Grid();
-var components = new Components();
-var animation = new Animation();
+var components = new Component();
+var animation = Animation;
 
 var Line = function () {
     var line = {};
@@ -60,7 +60,7 @@ var Line = function () {
 
     line.init = function (id) {
         var canvas = document.getElementById(id);
-        var ctx=canvas.getContext("2d");
+        ctx=canvas.getContext("2d");
     };
     line.setOption = function (option) {
         opt = option;
