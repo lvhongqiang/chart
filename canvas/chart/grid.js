@@ -1,5 +1,6 @@
 "use strict";
-var components = new Component();
+// var components = require("./components.js");
+var components = Components();
 
 var Grid = function () {
     var grid = {};
@@ -43,6 +44,7 @@ var Grid = function () {
         grid.maxPoint.x = grid.config.width - grid.config.padding.right;
         grid.maxPoint.y = grid.config.padding.top;
         // ctx.translate(0.5,0.5);
+        ctx.clearRect(-1,-1,grid.config.width+2,grid.config.height+2);
         ctx.setLineWidth(1);
         ctx.setStrokeStyle("rgba(200, 200, 200, 0.7)");
         ctx.setFontSize(11);
@@ -246,3 +248,5 @@ var Grid = function () {
 
     return grid;
 };
+
+module.exports = Grid();

@@ -20,3 +20,5 @@ var Timing = {
         return pos;
     }
 };
+
+module.exports = Timing;

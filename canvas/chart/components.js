@@ -1,5 +1,5 @@
 "use strict";
-var Component = function () {
+var Components = function () {
     var component = {};
 
     component.line = function (ctx, x1, y1, x2, y2, color, process) {
@@ -40,5 +40,6 @@ var Component = function () {
         ctx.fillText(text, x - 6, y + 22);
     };
 
-    return Component;
+    return component;
 };
+module.exports = Components();

@@ -1,5 +1,6 @@
 // var line = require('../chart/line.js');
-var line = Line();
+var line = new Line();
+
 var LineExample = function(){
     var example ={};
     example.startTouch=line.startTouch;
@@ -193,4 +194,5 @@ var LineExample = function(){
 
     return example;
 };
-LineExample().draw();
+
+module.exports = LineExample();
