@@ -1,5 +1,10 @@
-// var line = require('../chart/line.js');
-var line = new Line();
+
+var line;
+if("function"==typeof require){
+    line = require('../chart/line.js');
+}else{
+    line = new Line();
+}
 
 var ThumbLineExample = function(){
     var example ={};

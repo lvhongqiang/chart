@@ -1,12 +1,17 @@
 "use strict";
 
-// var grid = require("./grid.js");
-// var components = require("./components.js");
-// var animation = require("./animation");
-
-var components = new Components();
-var grid = new Grid();
-var animation = new Animation();
+var components;
+var grid;
+var animation;
+if("function"==typeof require){
+    grid = require("./grid.js");
+    components = require("./components.js");
+    animation = require("./animation");
+}else{
+    components = new Components();
+    grid = new Grid();
+    animation = new Animation();
+}
 
 var Line = function () {
     var line = {};
@@ -15,19 +20,32 @@ var Line = function () {
     var position = 0;
     var transX = 0;
     var opt = {};
+    var isDown = false;
+
+    line.id=0;
 
     line.clearQueue = function () {};
 
     line.startTouch = function (event) {
-        position = event.touches[0].x;
+        isDown = true;
+        if(event.touches === undefined){
+            position = event.layerX;
+        }else{
+            position = event.touches[0].x;
+        }
     };
     line.moveTouch = function (event) {
-        var max = grid.maxTransX();
-        if (max <= 0) {
-            return;
-        }
-        if (event.changedTouches !== null && event.changedTouches.length > 0) {
-            var x = event.changedTouches[0].x;
+        if(isDown){
+            var max = grid.maxTransX();
+            if (max <= 0) {
+                return;
+            }
+            var x;
+            if (event.changedTouches !== undefined && event.changedTouches.length > 0) {
+                x = event.changedTouches[0].x;
+            }else{
+                x = event.layerX;
+            }
             var dis = position - x;
             if (Math.abs(dis) > 1) {
                 if ((transX + dis) > 0 && (transX + dis) < max) {
@@ -39,32 +57,49 @@ var Line = function () {
         }
     };
     line.endTouch = function (event) {
+        isDown = false;
         var max = grid.maxTransX();
         if (max <= 0) {
             return;
         }
+        var x;
         if (event.changedTouches !== null && event.changedTouches.length > 0) {
-            var x = event.changedTouches[0].x;
-            var dis = position - x;
-            if (Math.abs(dis) > 1) {
-                if ((transX + dis) < 0) {
-                    line.move(0,0);
-                    transX = 0;
-                } else if ((transX + dis) > 0 && (transX + dis) < max) {
-                    line.move(transX + dis,0);
-                    transX += dis;
-                } else {
-                    line.move(max,0);
-                    transX = max;
-                }
+            x = event.changedTouches[0].x;
+        }else{
+            x = event.layerX;
+        }
+        var dis = position - x;
+        if (Math.abs(dis) > 1) {
+            if ((transX + dis) < 0) {
+                line.move(0,0);
+                transX = 0;
+            } else if ((transX + dis) > 0 && (transX + dis) < max) {
+                line.move(transX + dis,0);
+                transX += dis;
+            } else {
+                line.move(max,0);
+                transX = max;
             }
         }
     };
 
     line.init = function (id) {
-        canvas = document.getElementById(id);
-        ctx=canvas.getContext("2d");
+        line.id = id;
+        if("object"==typeof wx){
+            ctx = wx.createCanvasContext(id);
+        }else{
+            canvas = document.getElementById(id);
+            canvas.addEventListener("mousedown",line.startTouch.bind(this),false);
+            canvas.addEventListener("mousemove",line.moveTouch.bind(this),false);
+            canvas.addEventListener("mouseup",line.endTouch.bind(this),false);
+            canvas.addEventListener("mouseout",line.endTouch.bind(this),false);
+            ctx=canvas.getContext("2d");
+        }
         ctx.translate(0.5, 0.5);
+    };
+    line.clear = function () {
+        canvas = document.getElementById(line.id);
+        ctx=canvas.getContext("2d");
     };
     line.setOption = function (option) {
         opt = option;
@@ -77,6 +112,7 @@ var Line = function () {
             duration: duration,
             onProcess: function (process) {
                 ctx.translate( - transX, 0);
+                line.clear();
                 grid.init(ctx, opt);
                 grid.drawXAxis(ctx, opt);
                 var i = 0;

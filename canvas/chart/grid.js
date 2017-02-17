@@ -1,6 +1,11 @@
 "use strict";
 // var components = require("./components.js");
-var components = Components();
+var components;
+if("function"==typeof require){
+    components = require("./components.js");
+}else{
+    components = new Components();
+}
 
 var Grid = function () {
     var grid = {};
@@ -44,7 +49,7 @@ var Grid = function () {
         grid.maxPoint.x = grid.config.width - grid.config.padding.right;
         grid.maxPoint.y = grid.config.padding.top;
         // ctx.translate(0.5,0.5);
-        ctx.clearRect(-1,-1,grid.config.width+2,grid.config.height+2);
+        ctx.clearRect(-1,-1,grid.config.width*10,grid.config.height+2);
         ctx.setLineWidth(1);
         ctx.setStrokeStyle("rgba(200, 200, 200, 0.7)");
         ctx.setFontSize(11);
